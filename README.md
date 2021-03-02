@@ -21,7 +21,7 @@ I'd like the docking station to accept my bike
 
 | Objects | Messages |
 | ------- | -------- |
-| Person | Recieve bike |
+| Person | Receive bike |
 | Docking station | release bike |
 | Bike | status |
 | Docking station | accept bike |
