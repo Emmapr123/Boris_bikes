@@ -6,6 +6,7 @@ class DockingStation
   def initialize
     @bikes = []
     @capacity = 20
+    @broken = false
   end
 
   def capacity(capacity)
@@ -13,11 +14,26 @@ class DockingStation
   end
 
   def dock(bike)
-    fail 'No space at the ranch' if full?
+    unless @broken
+      fail 'No space at the ranch' if full?
+    end
     @bikes << bikes
   end
 
+  def report_broken
+    @broken = true
+  end
+
+  def broken?
+    @broken
+  end
+
+  def fix_bike
+    @broken = false
+  end
+
   def release_bike
+    fail 'Bike dont be wheeling' if broken?
     fail 'No bikes available' unless empty?
     @bikes.pop
   end
