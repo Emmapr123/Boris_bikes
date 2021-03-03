@@ -4,10 +4,3 @@ class DockingStation
   end
 
 end
-
-class Bike
-
-  def status
-  end
-
-end
