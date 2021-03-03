@@ -1,9 +1,9 @@
 require 'bike'
 
 describe Bike do
-  describe 'status' do
+  describe 'working?' do
     it 'responds to status' do
-      expect(subject).to respond_to(:status)
+      expect(subject).to respond_to(:working?)
     end
   end
 end

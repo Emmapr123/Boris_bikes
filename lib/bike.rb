@@ -1,6 +1,7 @@
 class Bike
 
-  def status
+  def working?
+
   end
 
 end
