@@ -1,10 +1,15 @@
 require 'bike'
 
 class DockingStation
-  attr_reader :bikes
+  attr_reader :bikes, :capacity
 
   def initialize
     @bikes = []
+    @capacity = 20
+  end
+
+  def capacity(capacity)
+     @capacity = capacity
   end
 
   def dock(bike)
@@ -24,7 +29,7 @@ private
   end
 
   def full?
-    @bikes.count >= 20
+    @bikes.count >= @capacity
   end
 
 end

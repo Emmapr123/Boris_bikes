@@ -2,6 +2,12 @@ require 'docking_station'
 
 describe DockingStation do
 
+  describe 'capacity' do
+    it 'responds to capacity' do
+      expect(subject.capacity(20)).to eq 20
+    end
+  end
+
   describe 'release_bike' do
     it 'responds to release_bike' do
       expect(subject).to respond_to(:release_bike)
