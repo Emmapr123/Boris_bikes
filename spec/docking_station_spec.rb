@@ -18,13 +18,18 @@ describe DockingStation do
   end
 
   describe 'dock' do
-    it 'docks a bike' do
-      expect(subject).to respond_to(:dock).with(1).argument
-    end
+    # it 'docks a bike' do
+    #   expect(subject).to respond_to(:dock).with(1).argument
+    # end
 
-    it 'takes bike' do
-      bike = Bike.new
-      expect(subject.dock(bike)).to eq bike
+    # it 'takes bike' do
+    #   bike = Bike.new
+    #   expect(subject.dock(bike)).to eq bike
+    # end
+
+    it 'raises an error when theres a bike' do
+      subject.dock(Bike.new)
+      expect{subject.dock Bike.new }.to raise_error 'No space at the ranch'
     end
   end
 
