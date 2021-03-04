@@ -1,59 +1,31 @@
 require 'docking_station'
+require 'bike'
 
 describe DockingStation do
-
-  describe 'capacity' do
-    it 'responds to capacity' do
-      expect(subject.capacity(20)).to eq 20
-    end
-  end
-
+  let(:bike) { Bike.new }
+  it { is_expected.to respond_to :release_bike }
   describe 'release_bike' do
-    it 'responds to release_bike' do
-      expect(subject).to respond_to(:release_bike)
-    end
-
-    it 'dont give no bike if bike be broken' do
-      subject.report_broken
-      expect{subject.release_bike}.to raise_error 'Bike dont be wheeling'
-    end
-    # it 'make a new bike' do
-    #   bike = subject.release_bike
-    #   expect(bike).to be_working
-    # end
-  #
-  #   it 'raises an error when no bikes are available' do
-  #     expect{subject.release_bike}.to raise_error 'No bikes available'
-  #   end
+    it "releases bike" do
+      @bike = subject.dock(bike)
+    expect(subject.release_bike).to eq bike
   end
-
-  describe 'dock' do
-    # it 'docks a bike' do
-    #   expect(subject).to respond_to(:dock).with(1).argument
-    # end
-
-    # it 'takes bike' do
-    #   bike = Bike.new
-    #   expect(subject.dock(bike)).to eq bike
-    # end
-
-    it 'raises an error when theres 20 bikes' do
-      subject.fix_bike
-      p subject
-      20.times { subject.dock(Bike.new) }
-      expect { subject.dock Bike.new }.to raise_error 'No space at the ranch'
-    end
-
-    it 'done take them broken bikes' do
-      subject.report_broken
-      expect{subject.dock(bike)}.not_to raise_error 'No space at the ranch'
-    end
-
+  it "raises error 'no bikes left' when there are no bikes" do
+  expect { subject.release_bike }.to raise_error "No bikes left"
   end
-
-  describe 'report_broken' do
-    it 'if bike is reported broken' do
-    expect(subject.report_broken).to eq true
+  it "raises error 'this bike is broken' when the bike is broken" do
+    @bike = subject.dock(bike)
+    bike.report_broken
+    expect { subject.release_bike }.to raise_error "This bike is broken"
+  end
+end
+  describe "dock" do
+    it { is_expected.to respond_to(:dock).with(1).argument }
+    it 'docking bike' do
+    expect(subject.dock(bike)).to eq [bike]
+    end
+    it "limits number of bikes" do
+      subject.capacity.times { subject.dock(bike) }
+      expect {subject.dock Bike.new }.to raise_error "There is already a bike here"
     end
   end
 end
