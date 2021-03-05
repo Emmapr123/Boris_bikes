@@ -8,7 +8,7 @@ class DockingStation
     @bike = []
     @bikes = Bike.new
     @capacity = capacity
-    @broken = @bikes.report_broken
+    @broken = []
   end
 
   def release_bike
@@ -21,6 +21,14 @@ class DockingStation
     fail 'There is already a bike here' if full?
     @bike << bike
   end
+
+  def broken_bikes 
+    @broken = @bike.select { |b| b.broken? }
+  end
+
+  def receive_fixed_bikes(bikes)
+    bikes.each { |bike| dock(bike) }
+  end 
 
   private
   def empty?
