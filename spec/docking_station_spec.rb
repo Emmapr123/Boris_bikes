@@ -3,7 +3,7 @@ require 'bike'
 
 describe DockingStation do
   let(:bike) { Bike.new }
-  
+
   describe 'release_bike' do
     it { is_expected.to respond_to :release_bike }
 
@@ -17,8 +17,8 @@ describe DockingStation do
     end
 
     it "raises error 'this bike is broken' when the bike is broken" do
-      @bike = subject.dock(bike)
-      bike.report_broken
+      bike = double(:bike, broken?: true)
+      subject.dock bike
       expect { subject.release_bike }.to raise_error "This bike is broken"
     end
   end
